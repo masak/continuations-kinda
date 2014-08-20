@@ -33,6 +33,8 @@ class Continuation {
     }
 
     our sub restore($file) {
+        return Continuation.new
+            unless $file.IO ~~ :e;
         return unmarshal(slurp($file), Continuation);
     }
 }
