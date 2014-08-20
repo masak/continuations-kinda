@@ -5,7 +5,7 @@ constant START = 0;
 constant FINISH = -1;
 
 class X::Continuation::Finished is Exception {
-    method message { "Continuation is spent" }
+    method message { "Continuation is finished" }
 }
 
 class X::Continuation::NoDestinationSet is Exception {
