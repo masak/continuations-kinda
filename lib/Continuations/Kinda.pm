@@ -4,7 +4,7 @@ constant START = 0;
 constant FINISH = Inf;
 
 my class Continuation {
-    has $.n;
+    has $.n = START;
     has $.finished = False;
     has $.next;
 
@@ -30,7 +30,7 @@ class X::Continuation::NoDestinationSet is Exception {
 }
 
 sub build_resumable(*@parts) is export {
-    return sub (:$cont = Continuation.new(:n(START))) {
+    return sub (:$cont = Continuation.new) {
         die X::Continuation::Finished.new
             if $cont.finished;
         my $n = $cont.n;
