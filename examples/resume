@@ -1,0 +1,24 @@
+#! /usr/local/bin/perl6 -Ilib
+
+use v6;
+
+use Continuations::Kinda;
+
+my &ex1 = build_resumable(
+    part(START, -> $cont {
+        say "if you turn on your water boiler...";
+        $cont.goto(1);
+    }),
+    part(1, -> $cont {
+        say "...the water should be boiling just about now";
+        $cont.goto(FINISH);
+    });
+);
+
+my $CONT_FILE = '_cont';
+my $cont = Continuation::restore($CONT_FILE);
+if $cont.finished {
+    $cont = Continuation.new;
+}
+$cont = ex1(:$cont);
+$cont.save($CONT_FILE);
