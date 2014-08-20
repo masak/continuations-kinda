@@ -1,0 +1,7 @@
+{
+    "name"        : "Continuations::Kinda",
+    "version"     : "0.01",
+    "description" : "Pause function calls in the middle",
+    "depends"     : ["JSON::Unmarshal"],
+    "source-url"  : "git://github.com/masak/continuations-kinda.git"
+}
