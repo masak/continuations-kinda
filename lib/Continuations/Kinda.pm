@@ -1,14 +1,24 @@
 use v6;
+use JSON::Unmarshal;
 
 constant START = 0;
 constant FINISH = Inf;
 
-my class Continuation {
+class Continuation {
     has $.n = START;
     has $.finished = False;
     has $.next;
 
     method goto($!next) {
+    }
+
+    method save($file) {
+        spurt $file,
+            sprintf '{ "n" : %d, "finished" : %s }', $.n, $.finished.lc;
+    }
+
+    our sub restore($file) {
+        return unmarshal(slurp($file), Continuation);
     }
 }
 
