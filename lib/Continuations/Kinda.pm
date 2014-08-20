@@ -61,3 +61,12 @@ sub build_resumable(*@parts) is export {
 sub part(Int $n, &block) is export {
     return Part.new(:$n, :&block);
 }
+
+sub resume_from_file(&fn, :$file = '_cont') is export {
+    my $cont = Continuation::restore($file);
+    if $cont.finished {
+        $cont = Continuation.new;
+    }
+    $cont = &fn(:$cont);
+    $cont.save($file);
+}
