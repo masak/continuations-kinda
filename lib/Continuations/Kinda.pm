@@ -2,7 +2,7 @@ use v6;
 use JSON::Unmarshal;
 
 constant START = 0;
-constant FINISH = Inf;
+constant FINISH = -1;
 
 class X::Continuation::Finished is Exception {
     method message { "Continuation is spent" }
